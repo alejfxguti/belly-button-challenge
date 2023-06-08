@@ -2,6 +2,8 @@
 
 ![Bacteria by filterforge.com](Images/bacteria.jpg)
 
+Check out and play around with my final interactive dashboard [here]:(https://alejfxguti.github.io/belly-button-challenge/)
+
 This interactive dashboard allows you to explore the fascinating world of the Belly Button Biodiversity dataset. The dataset catalogs the microbial species that colonize human navels and provides valuable insights into their diversity.
 
 ## Overview
