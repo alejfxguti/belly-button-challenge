@@ -25,7 +25,7 @@ function buildMetadata(sample) {
 function updateDemographicInfo() {
   var dropdownMenu = d3.select("#selDataset");
   var selectedID = dropdownMenu.property("value");
-  optionChanged(selectedID);
+  buildMetadata(selectedID); // Instead of calling optionChanged, call buildMetadata directly
 }
 
 // Build a Gauge Chart
