@@ -18,6 +18,8 @@ function buildMetadata(sample) {
     Object.entries(result).forEach(([key, value]) => {
       panel.append("h6").text(`${key}: ${value}`);
     });
+  }).catch((error) => {
+    console.error("Error while fetching metadata:", error);
   });
 }
 
@@ -28,6 +30,8 @@ function buildGaugeChart(sample) {
     var matchedSampleObj = objs.filter(sampleData => sampleData["id"] === parseInt(sample));
 
     gaugeChart(matchedSampleObj[0]);
+  }).catch((error) => {
+    console.error("Error while fetching gauge chart data:", error);
   });
 }
 
@@ -155,6 +159,9 @@ function buildCharts(sample) {
     };
 
     Plotly.newPlot("bar", barData, barLayout);
+
+    }).catch((error) => {
+    console.error("Error while fetching bubble and bar chart data:", error);
   });
 }
 
