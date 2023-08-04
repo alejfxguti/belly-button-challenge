@@ -21,13 +21,6 @@ function buildMetadata(sample) {
   });
 }
 
-// Update demographic info when ID is changed
-function updateDemographicInfo() {
-  var dropdownMenu = d3.select("#selDataset");
-  var selectedID = dropdownMenu.property("value");
-  buildMetadata(selectedID); // Instead of calling optionChanged, call buildMetadata directly
-}
-
 // Build a Gauge Chart
 function buildGaugeChart(sample) {
   d3.json("data/samples.json").then(data => {
@@ -188,14 +181,12 @@ function init() {
   });
 
   // Event listener for ID dropdown change
-  selector.on("change", updateDemographicInfo);
-}
-
-function optionChanged(newSample) {
-  // Get new data each time a new sample is selected
-  buildMetadata(newSample);
-  buildCharts(newSample);
-  buildGaugeChart(newSample);
+  selector.on("change", function () {
+    var selectedID = selector.property("value");
+    buildMetadata(selectedID);
+    buildCharts(selectedID);
+    buildGaugeChart(selectedID);
+  });
 }
 
 // Initialize the dashboard
