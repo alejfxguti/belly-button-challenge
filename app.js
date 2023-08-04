@@ -170,30 +170,48 @@ var selector = d3.select("#selDataset"); // Move selector variable outside the i
 
 function init() {
   // Use the list of sample names to populate the select options
-  d3.json("data/samples.json").then((data) => {
-    var sampleNames = data.names;
+  d3.json("data/samples.json")
+    .then((data) => {
+      var sampleNames = data.names;
 
-    sampleNames.forEach((sample) => {
-      selector
-        .append("option")
-        .text(sample)
-        .property("value", sample);
+      sampleNames.forEach((sample) => {
+        selector.append("option").text(sample).property("value", sample);
+      });
+
+      // Event listener for ID dropdown change
+      selector.on("change", function () {
+        var selectedID = selector.property("value");
+
+        // Fetch all the necessary data in parallel
+        Promise.all([
+          buildMetadata(selectedID),
+          buildCharts(selectedID),
+          buildGaugeChart(selectedID),
+        ]).then(() => {
+          // All data has been fetched, update the demographic panel and charts
+          buildMetadata(selectedID);
+          buildCharts(selectedID);
+          buildGaugeChart(selectedID);
+        });
+      });
+
+      // Use the first sample from the list to build the initial plots
+      const firstSample = sampleNames[0];
+      // Fetch all the necessary data in parallel
+      Promise.all([
+        buildMetadata(firstSample),
+        buildCharts(firstSample),
+        buildGaugeChart(firstSample),
+      ]).then(() => {
+        // All data has been fetched, update the demographic panel and charts
+        buildMetadata(firstSample);
+        buildCharts(firstSample);
+        buildGaugeChart(firstSample);
+      });
+    })
+    .catch((error) => {
+      console.error("Error while fetching sample names:", error);
     });
-
-    // Use the first sample from the list to build the initial plots
-    const firstSample = sampleNames[0];
-    buildMetadata(firstSample);
-    buildCharts(firstSample);
-    buildGaugeChart(firstSample);
-  });
-
-  // Event listener for ID dropdown change
-  selector.on("change", function () {
-    var selectedID = selector.property("value");
-    buildMetadata(selectedID);
-    buildCharts(selectedID);
-    buildGaugeChart(selectedID);
-  });
 }
 
 // Initialize the dashboard
