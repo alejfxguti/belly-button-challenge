@@ -53,8 +53,9 @@
 
     // Creating function for Data plotting (Bar, gauge, bubble)
     function getPlot(id) {
-      // Updated code for getting the data and plotting the charts
-      // ...
+      buildMetadata(id); // Update demographic info
+      buildCharts(id); // Update bar and bubble charts
+      buildGaugeChart(id); // Update gauge chart
     }
 
     // Create the function for the change event
@@ -65,7 +66,26 @@
     // Call the initialization function
     function init() {
       // Updated code for initializing the dropdown and default plot
-      // ...
+      var selector = d3.select("#selDataset");
+
+      // Use the list of sample names to populate the select options
+      d3.json("data/samples.json").then((data) => {
+        var sampleNames = data.names;
+
+        sampleNames.forEach((sample) => {
+          selector
+            .append("option")
+            .text(sample)
+            .property("value", sample);
+        });
+
+        // Event listener for ID dropdown change
+        selector.on("change", optionChanged);
+
+        // Use the first sample from the list to build the initial plots
+        const firstSample = sampleNames[0];
+        getPlot(firstSample);
+      });
     }
 
     init();
