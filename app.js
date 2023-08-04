@@ -166,9 +166,9 @@ function buildCharts(sample) {
 }
 
 // Initialize the dashboard
-function init() {
-  var selector = d3.select("#selDataset");
+var selector = d3.select("#selDataset"); // Move selector variable outside the init function
 
+function init() {
   // Use the list of sample names to populate the select options
   d3.json("data/samples.json").then((data) => {
     var sampleNames = data.names;
