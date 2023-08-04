@@ -13,7 +13,7 @@ function buildMetadata(sample) {
     var result = resultsarray[0];
 
     var panel = d3.select("#sample-metadata");
-    panel.html("");
+    panel.html(""); // Clear previous content
 
     Object.entries(result).forEach(([key, value]) => {
       panel.append("h6").text(`${key}: ${value}`);
