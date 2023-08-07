@@ -181,7 +181,15 @@ function init() {
 
       // Event listener for ID dropdown change
       selector.on("change", function () {
-    optionChanged(this.value);
+        optionChanged(this.value); // Call the optionChanged function to update the charts and metadata
+      });
+      
+      // Use the first sample from the list to build the initial plots
+      const firstSample = sampleNames[0];
+      optionChanged(firstSample); // Call the optionChanged function to initialize with the default sample
+    })
+    .catch((error) => {
+      console.error("Error while fetching sample names:", error);
     });
 }
 
