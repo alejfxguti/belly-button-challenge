@@ -41,10 +41,11 @@ function gaugeChart(data) {
     data.wfreq = 0;
   }
 
-  let degree = parseInt(data.wfreq) * (180 / 10);
-  let degrees = 180 - degree;
+  let level = parseFloat(data.wfreq) * 20; // Calculate the angle in degrees (0-180)
+  let degrees = 180 - level;
   let radius = 0.5;
-  let radians = degrees * Math.PI / 180;
+  let radians = (degrees * Math.PI) / 180;
+
   let x = radius * Math.cos(radians);
   let y = radius * Math.sin(radians);
 
@@ -180,37 +181,7 @@ function init() {
 
       // Event listener for ID dropdown change
       selector.on("change", function () {
-        var selectedID = selector.property("value");
-
-        // Fetch all the necessary data in parallel
-        Promise.all([
-          buildMetadata(selectedID),
-          buildCharts(selectedID),
-          buildGaugeChart(selectedID),
-        ]).then(() => {
-          // All data has been fetched, update the demographic panel and charts
-          buildMetadata(selectedID);
-          buildCharts(selectedID);
-          buildGaugeChart(selectedID);
-        });
-      });
-
-      // Use the first sample from the list to build the initial plots
-      const firstSample = sampleNames[0];
-      // Fetch all the necessary data in parallel
-      Promise.all([
-        buildMetadata(firstSample),
-        buildCharts(firstSample),
-        buildGaugeChart(firstSample),
-      ]).then(() => {
-        // All data has been fetched, update the demographic panel and charts
-        buildMetadata(firstSample);
-        buildCharts(firstSample);
-        buildGaugeChart(firstSample);
-      });
-    })
-    .catch((error) => {
-      console.error("Error while fetching sample names:", error);
+    optionChanged(this.value);
     });
 }
 
