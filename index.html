@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bellybutton Biodiversity</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <body>
@@ -45,60 +45,11 @@
     </div>
   </div>
 
-  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="app.js"></script>
-  <script>
-    
-  // Updated JavaScript code goes here
-
-  // Create a function to update the metadata panel
-  function updateMetadata(id) {
-    buildMetadata(id);
-  }
-
-  // Create a function to update all of the charts
-  function updatePlots(id) {
-    buildCharts(id);
-    buildGaugeChart(id);
-  }
-
-  // Create a function to handle the change event
-  function optionChanged(id) {
-    updateMetadata(id);
-    updatePlots(id);
-  }
-
-    // Call the initialization function
-    function init() {
-      // Updated code for initializing the dropdown and default plot
-      var selector = d3.select("#selDataset");
-
-      // Use the list of sample names to populate the select options
-      d3.json("data/samples.json").then((data) => {
-        var sampleNames = data.names;
-
-        sampleNames.forEach((sample) => {
-          selector
-            .append("option")
-            .text(sample)
-            .property("value", sample);
-        });
-
-        // Event listener for ID dropdown change
-        selector.on("change", optionChanged);
-
-        // Use the first sample from the list to build the initial plots
-        const firstSample = sampleNames[0];
-        getPlot(firstSample);
-      });
-    }
-
-    init();
-  </script>
+  <script src="data/samples.json"></script>
   
 </body>
 
 </html>
-
-
