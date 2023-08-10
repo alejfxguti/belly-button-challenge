@@ -49,19 +49,25 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="app.js"></script>
   <script>
-    // Updated JavaScript code goes here
+    
+  // Updated JavaScript code goes here
 
-    // Creating function for Data plotting (Bar, gauge, bubble)
-    function getPlot(id) {
-      buildMetadata(id); // Update demographic info
-      buildCharts(id); // Update bar and bubble charts
-      buildGaugeChart(id); // Update gauge chart
-    }
+  // Create a function to update the metadata panel
+  function updateMetadata(id) {
+    buildMetadata(id);
+  }
 
-    // Create the function for the change event
-    function optionChanged(id) {
-      getPlot(id);
-    }
+  // Create a function to update all of the charts
+  function updatePlots(id) {
+    buildCharts(id);
+    buildGaugeChart(id);
+  }
+
+  // Create a function to handle the change event
+  function optionChanged(id) {
+    updateMetadata(id);
+    updatePlots(id);
+  }
 
     // Call the initialization function
     function init() {
