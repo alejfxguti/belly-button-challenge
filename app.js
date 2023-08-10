@@ -6,6 +6,7 @@ var arrColorsG = ["#5899DA", "#E8743B", "#19A979", "#ED4A7B", "#945ECF", "#13A4B
 // Use `d3.json` to fetch the metadata for a sample
 // Hint: Inside the loop, you will need to use d3 to append new
 // tags for each key-value in the metadata.
+
 function buildMetadata(sample) {
   d3.json("data/samples.json").then((data) => {
     var metadata = data.metadata;
