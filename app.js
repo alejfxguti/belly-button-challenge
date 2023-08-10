@@ -11,7 +11,7 @@ var arrColorsG = ["#5899DA", "#E8743B", "#19A979", "#ED4A7B", "#945ECF", "#13A4B
 // Hint: Inside the loop, you will need to use d3 to append new
 // tags for each key-value in the metadata.
 function buildMetadata(sample) {
-  d3.json("samples.json").then((data) => {
+  d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
     var metadata= data.metadata;
     var resultsarray= metadata.filter(sampleobject => 
       sampleobject.id == sample);
@@ -36,7 +36,7 @@ function buildMetadata(sample) {
 function buildGaugeChart(sample) {
   console.log("sample", sample);
 
-  d3.json("samples.json").then(data =>{
+  d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then(data =>{
 
     var objs = data.metadata;
     //console.log("objs", objs);
@@ -130,7 +130,7 @@ function gaugeChart(data) {
 function buildCharts(sample) {
 
 // Use `d3.json` to fetch the sample data for the plots
-d3.json("samples.json").then((data) => {
+d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
   var samples= data.samples;
   var resultsarray= samples.filter(sampleobject => 
       sampleobject.id == sample);
@@ -197,7 +197,7 @@ function init() {
 var selector = d3.select("#selDataset");
 
 // Use the list of sample names to populate the select options
-d3.json("samples.json").then((data) => {
+d3.json("https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json").then((data) => {
   var sampleNames = data.names;
   sampleNames.forEach((sample) => {
     selector
